@@ -1,3 +1,3 @@
 {
-	"mongoURI": "mongodb+srv: //marc123:marc123@vote-pjkdu.mongodb.net/test?retryWrites=true&w=majority"
+	"mongoURI": "mongodb+srv://marc123:marc123@vote-pjkdu.mongodb.net/test?retryWrites=true&w=majority"
 }
