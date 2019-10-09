@@ -22,6 +22,20 @@ const PollState = props => {
 				option2: 'Jesus',
 				option3: 'Dinosaurs',
 			},
+			{
+				id: 1,
+				question: 'Who died for our sins?',
+				option1: 'Jesus',
+				option2: 'Lee Harvey Oswald',
+				option3: 'Dinosaurs',
+			},
+			{
+				id: 1,
+				question: 'Who would make a better President?',
+				option1: 'Bobcat Goldthwait',
+				option2: 'Jesus',
+				option3: 'Dinosaurs',
+			},
 		],
 	};
 
