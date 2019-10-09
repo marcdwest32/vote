@@ -60,30 +60,39 @@ router.post(
 // @desc Update poll
 // @access Private
 router.put('/:id', auth, async (req, res) => {
-	const { question, option1, option2, option3 } = req.body;
+	const { vote } = req.body;
 
-	// Poll object
-	const pollFields = {};
-	if (question) pollFields.question = question;
-	if (option1) pollFields.option1 = option1;
-	if (option2) pollFields.option2 = option2;
-	if (option3) pollFields.option3 = option3;
+	// get current poll results
 
 	try {
 		let poll = await Poll.findById(req.params.id);
 
 		if (!poll) return res.status(404).json({ msg: 'Poll Not Found' });
 
-		// Make sure user owns poll
-		if (poll.user.toString() !== req.user.id) {
-			return res.status(401).json({ msg: 'Not Authorized ' });
+		if (vote === '1') {
+			poll = await Poll.findByIdAndUpdate(
+				req.params.id,
+				{ $inc: { option1votes: 1 } },
+				{ new: true }
+			);
+			res.status(200).send('Vote Counted!');
 		}
-
-		poll = await Poll.findByIdAndUpdate(
-			req.params.id,
-			{ $set: pollFields },
-			{ new: true }
-		);
+		if (vote === '2') {
+			poll = await Poll.findByIdAndUpdate(
+				req.params.id,
+				{ $inc: { option2votes: 1 } },
+				{ new: true }
+			);
+			res.status(200).send('Vote Counted!');
+		}
+		if (vote === '3') {
+			poll = await Poll.findByIdAndUpdate(
+				req.params.id,
+				{ $inc: { option3votes: 1 } },
+				{ new: true }
+			);
+			res.status(200).send('Vote Counted!');
+		}
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');
@@ -93,8 +102,24 @@ router.put('/:id', auth, async (req, res) => {
 // @route DELETE api/polls/:id
 // @desc Delete poll
 // @access Private
-router.put('/:id', (req, res) => {
-	res.send('Delete poll');
+router.delete('/:id', auth, async (req, res) => {
+	try {
+		let poll = await Poll.findById(req.params.id);
+
+		if (!poll) return res.status(404).json({ msg: 'Poll Not Found' });
+
+		// Verify user owns poll
+		if (poll.user.toString() !== req.user.id) {
+			return res.status(401).json({ msg: 'Not Authorized' });
+		}
+
+		await Poll.findByIdAndDelete(req.params.id);
+
+		res.json({ msg: 'Poll Deleted' });
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('Server Error');
+	}
 });
 
 module.exports = router;
