@@ -42,6 +42,10 @@ const PollState = props => {
 	const [state, dispatch] = useReducer(pollReducer, initialState);
 
 	// Add Poll
+	const addPoll = poll => {
+		poll.id = uuid.v4();
+		dispatch({ type: ADD_POLL, payload: poll });
+	};
 
 	// Delete Poll
 
@@ -59,6 +63,7 @@ const PollState = props => {
 		<pollContext.Provider
 			value={{
 				polls: state.polls,
+				addPoll,
 			}}
 		>
 			{props.children}
