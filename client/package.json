@@ -1,22 +1,20 @@
 {
-	"name": "vote",
+	"name": "client",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"bcryptjs": "^2.4.3",
-		"config": "^3.2.3",
-		"express": "^4.17.1",
-		"express-validator": "^6.2.0",
-		"jsonwebtoken": "^8.5.1",
-		"mongoose": "^5.7.3",
+		"axios": "^0.19.0",
 		"react": "^16.10.2",
 		"react-dom": "^16.10.2",
-		"react-scripts": "3.2.0"
+		"react-router-dom": "^5.1.2",
+		"react-scripts": "3.2.0",
+		"react-transition-group": "^4.3.0",
+		"uuid": "^3.3.3"
 	},
 	"scripts": {
-		"start": "node server.js",
+		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"server": "nodemon server.js",
+		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
@@ -34,21 +32,5 @@
 			"last 1 safari version"
 		]
 	},
-	"description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-	"main": "index.js",
-	"devDependencies": {
-		"concurrently": "^5.0.0",
-		"nodemon": "^1.19.3"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/marcdwest32/vote.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/marcdwest32/vote/issues"
-	},
-	"homepage": "https://github.com/marcdwest32/vote#readme"
+	"proxy": "http://localhost:5000"
 }
