@@ -1,9 +1,15 @@
 import React from 'react';
+import Polls from '../polls/Polls';
 
 const Home = () => {
 	return (
-		<div>
-			<h1>Home</h1>
+		<div className='grid-2'>
+			<div>
+				{/* Poll Form? */}
+			</div>
+			<div>
+				<Polls />
+			</div>
 		</div>
 	);
 };
