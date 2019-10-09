@@ -13,12 +13,27 @@ const PollSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	option1votes: {
+		type: Number,
+		default: 0,
+		required: true,
+	},
 	option2: {
 		type: String,
 		required: true,
 	},
+	option2votes: {
+		type: Number,
+		default: 0,
+		required: true,
+	},
 	option3: {
 		type: String,
+		required: true,
+	},
+	option3votes: {
+		type: Number,
+		default: 0,
 		required: true,
 	},
 	date: {
