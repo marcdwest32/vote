@@ -15,6 +15,16 @@ export default (state, action) => {
 				...state,
 				polls: [...state.polls, action.payload],
 			};
+		case DELETE_POLL:
+			return {
+				...state,
+				polls: state.polls.filter(poll => poll.id !== action.payload),
+			};
+		case SET_CURRENT:
+			return {
+				...state,
+				current: action.payload,
+			};
 		default:
 			return state;
 	}
