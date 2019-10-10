@@ -23,11 +23,7 @@ const PollItem = ({ poll }) => {
 		<div className='card bg-light'>
 			<h3 className='text-primary text-left'>
 				{question}{' '}
-				<div
-					style={{ float: 'right' }}
-					className={'badge badge-primary'}
-					// onClick={() => setCurrent(poll)}
-				>
+				<div style={{ float: 'right' }} className={'badge badge-primary'}>
 					Vote
 				</div>
 			</h3>
