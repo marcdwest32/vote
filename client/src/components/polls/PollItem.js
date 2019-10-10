@@ -4,25 +4,66 @@ import PollContext from '../../context/poll/pollContext';
 
 const PollItem = ({ poll }) => {
 	const pollContext = useContext(PollContext);
-	const { id, question, option1, option2, option3 } = poll;
+	const { setCurrent } = pollContext;
+	const {
+		id,
+		question,
+		option1,
+		option2,
+		option3,
+		option1vote,
+		option2vote,
+		option3vote,
+	} = poll;
+
+	const checked = 'fas fa-check-circle';
+	const unchecked = 'far fa-circle';
 
 	return (
 		<div className='card bg-light'>
 			<h3 className='text-primary text-left'>
 				{question}{' '}
-				<span style={{ float: 'right' }} className={'badge badge-primary '}>
+				<div
+					style={{ float: 'right' }}
+					className={'badge badge-primary'}
+					// onClick={() => setCurrent(poll)}
+				>
 					Vote
-				</span>
+				</div>
 			</h3>
 			<ul className='list'>
 				<li>
-					<i className='fas fa-dice-one'> {option1}</i>
+					<i
+						className={poll.current === 1 ? checked : unchecked}
+						onClick={() => setCurrent(poll, 1)}
+					>
+						{' '}
+						{option1}
+					</i>
+					{'  '}
+					{option1vote}
 				</li>
 				<li>
-					<i className='fas fa-dice-two'> {option2}</i>
+					<i
+						className={poll.current === 2 ? checked : unchecked}
+						onClick={() => setCurrent(poll, 2)}
+					>
+						{' '}
+						{option2}
+					</i>
+					{'  '}
+					{option2vote}
 				</li>
 				<li>
-					<i className='fas fa-dice-three'> {option3}</i>
+					<i
+						className={poll.current === 3 ? checked : unchecked}
+						onClick={() => setCurrent(poll, 3)}
+					>
+						{' '}
+						{option3}
+					</i>
+					{'  '}
+					{option3vote}
 				</li>
 			</ul>
 		</div>
