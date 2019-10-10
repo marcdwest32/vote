@@ -2,7 +2,6 @@ import {
 	ADD_POLL,
 	DELETE_POLL,
 	SET_CURRENT,
-	CLEAR_CURRENT,
 	UPDATE_POLL,
 	FILTER_POLLS,
 	CLEAR_FILTER,
@@ -23,7 +22,12 @@ export default (state, action) => {
 		case SET_CURRENT:
 			return {
 				...state,
-				current: action.payload,
+				polls: state.polls.map(poll => {
+					if (poll.id === action.payload.poll.id) {
+						poll.current = action.payload.option;
+					}
+					return poll;
+				}),
 			};
 		default:
 			return state;
