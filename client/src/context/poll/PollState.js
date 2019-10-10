@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import axios from 'axios';
 import uuid from 'uuid';
 import pollContext from './pollContext';
 import pollReducer from './pollReducer';
@@ -6,7 +7,7 @@ import {
 	ADD_POLL,
 	DELETE_POLL,
 	SET_CURRENT,
-	UPDATE_POLL,
+	UPDATE_POLL, // TODO dispatch
 	FILTER_POLLS,
 	CLEAR_FILTER,
 } from '../types';
@@ -73,6 +74,11 @@ const PollState = props => {
 	};
 
 	// Update Poll
+	const updatePoll = poll => {
+		axios.put(`/${poll.id}`, { vote: poll.current }).then(updatedPoll => {
+			dispatch({ type: UPDATE_POLL, payload: updatedPoll });
+		});
+	};
 
 	// Filter Polls
 
@@ -85,6 +91,7 @@ const PollState = props => {
 				addPoll,
 				deletePoll,
 				setCurrent,
+				updatePoll,
 			}}
 		>
 			{props.children}
