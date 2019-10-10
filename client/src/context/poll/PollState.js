@@ -6,7 +6,6 @@ import {
 	ADD_POLL,
 	DELETE_POLL,
 	SET_CURRENT,
-	CLEAR_CURRENT,
 	UPDATE_POLL,
 	FILTER_POLLS,
 	CLEAR_FILTER,
@@ -21,20 +20,32 @@ const PollState = props => {
 				option1: 'Because',
 				option2: 'Jesus',
 				option3: 'Dinosaurs',
+				option1vote: 0,
+				option2vote: 0,
+				option3vote: 0,
+				current: null,
 			},
 			{
-				id: 1,
+				id: 2,
 				question: 'Who died for our sins?',
 				option1: 'Jesus',
 				option2: 'Lee Harvey Oswald',
 				option3: 'Dinosaurs',
+				option1vote: 0,
+				option2vote: 0,
+				option3vote: 0,
+				current: null,
 			},
 			{
-				id: 1,
+				id: 3,
 				question: 'Who would make a better President?',
 				option1: 'Bobcat Goldthwait',
 				option2: 'Jesus',
 				option3: 'Dinosaurs',
+				option1vote: 0,
+				option2vote: 0,
+				option3vote: 0,
+				current: null,
 			},
 		],
 	};
@@ -48,10 +59,18 @@ const PollState = props => {
 	};
 
 	// Delete Poll
+	const deletePoll = id => {
+		dispatch({ type: DELETE_POLL, payload: id });
+	};
 
 	// Set Current
-
-	// Clear Current
+	const setCurrent = (poll, option) => {
+		const payload = {
+			poll,
+			option,
+		};
+		dispatch({ type: SET_CURRENT, payload });
+	};
 
 	// Update Poll
 
@@ -64,6 +83,8 @@ const PollState = props => {
 			value={{
 				polls: state.polls,
 				addPoll,
+				deletePoll,
+				setCurrent,
 			}}
 		>
 			{props.children}
