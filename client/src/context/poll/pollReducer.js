@@ -14,11 +14,10 @@ export default (state, action) => {
 				...state,
 				polls: [...state.polls, action.payload],
 			};
-			case UPDATE_POLL:
-				return {
-					...state,
-					
-				}
+		case UPDATE_POLL:
+			return {
+				...state,
+			};
 		case DELETE_POLL:
 			return {
 				...state,
@@ -33,6 +32,19 @@ export default (state, action) => {
 					}
 					return poll;
 				}),
+			};
+		case FILTER_POLLS:
+			return {
+				...state,
+				filtered: state.polls.filter(poll => {
+					const regex = new RegExp(`${action.payload}`, 'gi');
+					return poll.name.match(regex);
+				}),
+			};
+		case CLEAR_FILTER:
+			return {
+				...state,
+				filtered: null,
 			};
 		default:
 			return state;
