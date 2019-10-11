@@ -25,6 +25,7 @@ const PollItem = ({ poll }) => {
 				{question}{' '}
 				<div style={{ float: 'right' }} className={'badge badge-primary'}>
 					Vote
+					{/* TODO add clickHandler for casting vote */}
 				</div>
 			</h3>
 			<ul className='list'>

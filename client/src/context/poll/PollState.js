@@ -7,7 +7,7 @@ import {
 	ADD_POLL,
 	DELETE_POLL,
 	SET_CURRENT,
-	UPDATE_POLL, // TODO dispatch
+	UPDATE_POLL,
 	FILTER_POLLS,
 	CLEAR_FILTER,
 } from '../types';
