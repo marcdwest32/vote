@@ -101,6 +101,7 @@ const PollState = props => {
 				updatePoll,
 				filterPolls,
 				clearFilter,
+				filtered: state.filtered,
 			}}
 		>
 			{props.children}
