@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
-import pollContext from './pollContext';
+import PollContext from './pollContext';
 import pollReducer from './pollReducer';
 import {
 	ADD_POLL,
@@ -49,6 +49,7 @@ const PollState = props => {
 				current: null,
 			},
 		],
+		filtered: null,
 	};
 
 	const [state, dispatch] = useReducer(pollReducer, initialState);
@@ -81,21 +82,29 @@ const PollState = props => {
 	};
 
 	// Filter Polls
+	const filterPolls = text => {
+		dispatch({ type: FILTER_POLLS, payload: text });
+	};
 
 	// Clear Filter
+	const clearFilter = () => {
+		dispatch({ type: CLEAR_FILTER });
+	};
 
 	return (
-		<pollContext.Provider
+		<PollContext.Provider
 			value={{
 				polls: state.polls,
 				addPoll,
 				deletePoll,
 				setCurrent,
 				updatePoll,
+				filterPolls,
+				clearFilter,
 			}}
 		>
 			{props.children}
-		</pollContext.Provider>
+		</PollContext.Provider>
 	);
 };
 
