@@ -38,7 +38,7 @@ export default (state, action) => {
 				...state,
 				filtered: state.polls.filter(poll => {
 					const regex = new RegExp(`${action.payload}`, 'gi');
-					return poll.name.match(regex);
+					return poll.question.match(regex);
 				}),
 			};
 		case CLEAR_FILTER:
