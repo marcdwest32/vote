@@ -1,6 +1,7 @@
 import React from 'react';
 import Polls from '../polls/Polls';
 import PollForm from '../polls/PollForm';
+import PollFilter from '../polls/PollFilter';
 
 const Home = () => {
 	return (
@@ -9,6 +10,7 @@ const Home = () => {
 				<PollForm />
 			</div>
 			<div>
+				<PollFilter />
 				<Polls />
 			</div>
 		</div>
