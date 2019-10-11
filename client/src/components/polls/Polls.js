@@ -5,13 +5,17 @@ import PollContext from '../../context/poll/pollContext';
 const Polls = () => {
 	const pollContext = useContext(PollContext);
 
-	const { polls } = pollContext;
+	const { polls, filtered } = pollContext;
+
+	if (polls.length === 0) {
+		return <h4>Please Post a Question</h4>;
+	}
 
 	return (
 		<Fragment>
-			{polls.map(poll => (
-				<PollItem id={poll.id} poll={poll} />
-			))}
+			{filtered !== null
+				? filtered.map(poll => <PollItem id={poll._id} poll={poll} />)
+				: polls.map(poll => <PollItem id={poll._id} poll={poll} />)}
 		</Fragment>
 	);
 };
