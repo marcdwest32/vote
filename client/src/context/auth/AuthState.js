@@ -65,6 +65,7 @@ const AuthState = props => {
 		}
 	};
 
+	// Login User
 	const login = async formData => {
 		const config = {
 			headers: {
@@ -88,6 +89,18 @@ const AuthState = props => {
 		}
 	};
 
+	//Logout
+	const logout = () =>
+		dispatch({
+			type: LOGOUT,
+		});
+
+	//Clear Errors
+	const clearErrors = () =>
+		dispatch({
+			type: CLEAR_ERRORS,
+		});
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -99,8 +112,8 @@ const AuthState = props => {
 				register,
 				loadUser,
 				login,
-				// logout,
-				// clearErrors,
+				logout,
+				clearErrors,
 			}}
 		>
 			{props.children}
