@@ -54,7 +54,7 @@ const PollState = props => {
 		};
 		try {
 			console.log('right here');
-			const res = await axios.put(`/api/polls/${poll.id}`, {
+			const res = await axios.put(`/api/polls/${poll._id}`, {
 				vote: poll.current,
 				config,
 			});

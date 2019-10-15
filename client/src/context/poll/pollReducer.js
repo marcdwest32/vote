@@ -20,19 +20,19 @@ export default (state, action) => {
 			return {
 				...state,
 				polls: state.polls.map(poll =>
-					poll.id === action.payload.id ? action.payload : poll
+					poll._id === action.payload._id ? action.payload : poll
 				),
 			};
 		case DELETE_POLL:
 			return {
 				...state,
-				polls: state.polls.filter(poll => poll.id !== action.payload),
+				polls: state.polls.filter(poll => poll._id !== action.payload),
 			};
 		case SET_CURRENT:
 			return {
 				...state,
 				polls: state.polls.map(poll => {
-					if (poll.id === action.payload.poll.id) {
+					if (poll._id === action.payload.poll._id) {
 						poll.current = action.payload.option;
 					}
 					return poll;

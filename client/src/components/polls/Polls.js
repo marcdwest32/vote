@@ -17,12 +17,12 @@ const Polls = () => {
 			<TransitionGroup>
 				{filtered !== null
 					? filtered.map(poll => (
-							<CSSTransition key={poll.id} timeout={500} classNames='item'>
+							<CSSTransition key={poll._id} timeout={500} classNames='item'>
 								<PollItem poll={poll} />
 							</CSSTransition>
 					  ))
 					: polls.map(poll => (
-							<CSSTransition key={poll.id} timeout={500} classNames='item'>
+							<CSSTransition key={poll._id} timeout={500} classNames='item'>
 								<PollItem poll={poll} />
 							</CSSTransition>
 					  ))}
