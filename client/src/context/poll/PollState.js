@@ -1,10 +1,10 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import uuid from 'uuid';
 import PollContext from './pollContext';
 import pollReducer from './pollReducer';
 import {
 	ADD_POLL,
+	POLL_ERROR,
 	DELETE_POLL,
 	SET_CURRENT,
 	UPDATE_POLL,
@@ -15,50 +15,29 @@ import {
 
 const PollState = props => {
 	const initialState = {
-		polls: [
-			{
-				id: 1,
-				question: 'Why are we here?',
-				option1: 'Because',
-				option2: 'Jesus',
-				option3: 'Dinosaurs',
-				option1vote: 0,
-				option2vote: 0,
-				option3vote: 0,
-				current: null,
-			},
-			{
-				id: 2,
-				question: 'Who died for our sins?',
-				option1: 'Jesus',
-				option2: 'Lee Harvey Oswald',
-				option3: 'Dinosaurs',
-				option1vote: 0,
-				option2vote: 0,
-				option3vote: 0,
-				current: null,
-			},
-			{
-				id: 3,
-				question: 'Who would make a better President?',
-				option1: 'Bobcat Goldthwait',
-				option2: 'Jesus',
-				option3: 'Dinosaurs',
-				option1vote: 0,
-				option2vote: 0,
-				option3vote: 0,
-				current: null,
-			},
-		],
+		polls: [],
 		filtered: null,
+		error: null,
 	};
 
 	const [state, dispatch] = useReducer(pollReducer, initialState);
 
 	// Add Poll
-	const addPoll = poll => {
-		poll.id = uuid.v4();
-		dispatch({ type: ADD_POLL, payload: poll });
+	const addPoll = async poll => {
+		const config = {
+			header: {
+				'Content-Type': 'application/json',
+			},
+		};
+		try {
+			const res = await axios.post('/api/polls', poll, config);
+			dispatch({ type: ADD_POLL, payload: res.data });
+		} catch (err) {
+			dispatch({
+				type: POLL_ERROR,
+				payload: err.response.msg,
+			});
+		}
 	};
 
 	// Delete Poll
@@ -74,7 +53,7 @@ const PollState = props => {
 			},
 		};
 		try {
-			console.log('right here')
+			console.log('right here');
 			const res = await axios.put(`/api/polls/${poll.id}`, {
 				vote: poll.current,
 				config,
@@ -89,7 +68,6 @@ const PollState = props => {
 				payload: err.response.msg,
 			});
 		}
-		// axios.put(`/${poll.id}`, { vote: poll.current }).then(updatedPoll => {});
 	};
 
 	// Set Current
@@ -115,13 +93,14 @@ const PollState = props => {
 		<PollContext.Provider
 			value={{
 				polls: state.polls,
+				filtered: state.filtered,
+				error: state.error,
 				addPoll,
 				deletePoll,
 				setCurrent,
 				updatePoll,
 				filterPolls,
 				clearFilter,
-				filtered: state.filtered,
 			}}
 		>
 			{props.children}
