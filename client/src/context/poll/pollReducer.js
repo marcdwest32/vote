@@ -5,6 +5,7 @@ import {
 	UPDATE_POLL, // TODO this
 	FILTER_POLLS,
 	CLEAR_FILTER,
+	VOTE_ERROR,
 } from '../types';
 
 export default (state, action) => {
@@ -17,6 +18,9 @@ export default (state, action) => {
 		case UPDATE_POLL:
 			return {
 				...state,
+				polls: state.polls.map(poll =>
+					poll.id === action.payload.id ? action.payload : poll
+				),
 			};
 		case DELETE_POLL:
 			return {
@@ -45,6 +49,11 @@ export default (state, action) => {
 			return {
 				...state,
 				filtered: null,
+			};
+		case VOTE_ERROR:
+			return {
+				...state,
+				error: action.payload,
 			};
 		default:
 			return state;
