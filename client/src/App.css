@@ -434,8 +434,8 @@ table th {
 		text-align: center;
 		justify-content: center;
 	}
+}
 
-	.vote-button :hover {
-		cursor: pointer;
-	}
+.hover-pointer:hover {
+	cursor: pointer;
 }
