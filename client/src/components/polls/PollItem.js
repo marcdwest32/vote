@@ -25,14 +25,14 @@ const PollItem = ({ poll }) => {
 				{question}{' '}
 				<div
 					style={{ float: 'right' }}
-					className={'badge badge-primary vote-button'}
+					className={'badge badge-primary hover-pointer'}
 					onClick={() => updatePoll(poll)}
 				>
 					Vote
 				</div>
 			</h3>
 			<ul className='list'>
-				<li>
+				<li className='hover-pointer'>
 					<i
 						className={poll.current === 1 ? checked : unchecked}
 						onClick={() => setCurrent(poll, 1)}
@@ -43,7 +43,7 @@ const PollItem = ({ poll }) => {
 					{'  '}
 					{option1vote}
 				</li>
-				<li>
+				<li className='hover-pointer'>
 					<i
 						className={poll.current === 2 ? checked : unchecked}
 						onClick={() => setCurrent(poll, 2)}
@@ -54,7 +54,7 @@ const PollItem = ({ poll }) => {
 					{'  '}
 					{option2vote}
 				</li>
-				<li>
+				<li className='hover-pointer'>
 					<i
 						className={poll.current === 3 ? checked : unchecked}
 						onClick={() => setCurrent(poll, 3)}
