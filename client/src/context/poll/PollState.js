@@ -8,6 +8,7 @@ import {
 	DELETE_POLL,
 	SET_CURRENT,
 	UPDATE_POLL,
+	VOTE_ERROR,
 	FILTER_POLLS,
 	CLEAR_FILTER,
 } from '../types';
@@ -65,6 +66,32 @@ const PollState = props => {
 		dispatch({ type: DELETE_POLL, payload: id });
 	};
 
+	// Update Poll
+	const updatePoll = async poll => {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		try {
+			console.log('right here')
+			const res = await axios.put(`/api/polls/${poll.id}`, {
+				vote: poll.current,
+				config,
+			});
+			dispatch({
+				type: UPDATE_POLL,
+				payload: res.data,
+			});
+		} catch (err) {
+			dispatch({
+				type: VOTE_ERROR,
+				payload: err.response.msg,
+			});
+		}
+		// axios.put(`/${poll.id}`, { vote: poll.current }).then(updatedPoll => {});
+	};
+
 	// Set Current
 	const setCurrent = (poll, option) => {
 		const payload = {
@@ -72,13 +99,6 @@ const PollState = props => {
 			option,
 		};
 		dispatch({ type: SET_CURRENT, payload });
-	};
-
-	// Update Poll
-	const updatePoll = poll => {
-		axios.put(`/${poll.id}`, { vote: poll.current }).then(updatedPoll => {
-			dispatch({ type: UPDATE_POLL, payload: updatedPoll });
-		});
 	};
 
 	// Filter Polls
