@@ -1,8 +1,9 @@
 import {
 	ADD_POLL,
+	GET_POLLS,
 	DELETE_POLL,
 	SET_CURRENT,
-	UPDATE_POLL, // TODO this
+	UPDATE_POLL,
 	FILTER_POLLS,
 	CLEAR_FILTER,
 	VOTE_ERROR,
@@ -11,10 +12,17 @@ import {
 
 export default (state, action) => {
 	switch (action.type) {
+		case GET_POLLS:
+			return {
+				...state,
+				polls: action.payload,
+				loading: false,
+			};
 		case ADD_POLL:
 			return {
 				...state,
 				polls: [...state.polls, action.payload],
+				loading: false,
 			};
 		case UPDATE_POLL:
 			return {
@@ -22,11 +30,13 @@ export default (state, action) => {
 				polls: state.polls.map(poll =>
 					poll._id === action.payload._id ? action.payload : poll
 				),
+				loading: false,
 			};
 		case DELETE_POLL:
 			return {
 				...state,
 				polls: state.polls.filter(poll => poll._id !== action.payload),
+				loading: false,
 			};
 		case SET_CURRENT:
 			return {
