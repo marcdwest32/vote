@@ -4,7 +4,7 @@ import PollContext from '../../context/poll/pollContext';
 
 const PollItem = ({ poll }) => {
 	const pollContext = useContext(PollContext);
-	const { setCurrent } = pollContext;
+	const { setCurrent, updatePoll } = pollContext;
 	const {
 		id,
 		question,
@@ -23,9 +23,12 @@ const PollItem = ({ poll }) => {
 		<div className='card bg-light'>
 			<h3 className='text-primary text-left'>
 				{question}{' '}
-				<div style={{ float: 'right' }} className={'badge badge-primary'}>
+				<div
+					style={{ float: 'right' }}
+					className={'badge badge-primary vote-button'}
+					onClick={() => updatePoll(poll)}
+				>
 					Vote
-					{/* TODO add clickHandler for casting vote */}
 				</div>
 			</h3>
 			<ul className='list'>
