@@ -6,7 +6,7 @@ const PollItem = ({ poll }) => {
 	const pollContext = useContext(PollContext);
 	const { setCurrent, updatePoll } = pollContext;
 	const {
-		id,
+		_id,
 		question,
 		option1,
 		option2,
