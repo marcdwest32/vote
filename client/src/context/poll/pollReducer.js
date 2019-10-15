@@ -6,6 +6,7 @@ import {
 	FILTER_POLLS,
 	CLEAR_FILTER,
 	VOTE_ERROR,
+	POLL_ERROR,
 } from '../types';
 
 export default (state, action) => {
@@ -50,6 +51,7 @@ export default (state, action) => {
 				...state,
 				filtered: null,
 			};
+		case POLL_ERROR:
 		case VOTE_ERROR:
 			return {
 				...state,
