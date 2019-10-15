@@ -10,6 +10,7 @@ const Navbar = ({ title, icon }) => {
 
 	const onLogout = () => {
 		logout();
+		
 	};
 
 	const authLinks = (
