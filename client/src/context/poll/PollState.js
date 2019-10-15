@@ -4,6 +4,7 @@ import PollContext from './pollContext';
 import pollReducer from './pollReducer';
 import {
 	ADD_POLL,
+	GET_POLLS,
 	POLL_ERROR,
 	DELETE_POLL,
 	SET_CURRENT,
@@ -15,7 +16,7 @@ import {
 
 const PollState = props => {
 	const initialState = {
-		polls: [],
+		polls: null,
 		filtered: null,
 		error: null,
 	};
@@ -32,6 +33,19 @@ const PollState = props => {
 		try {
 			const res = await axios.post('/api/polls', poll, config);
 			dispatch({ type: ADD_POLL, payload: res.data });
+		} catch (err) {
+			dispatch({
+				type: POLL_ERROR,
+				payload: err.response.msg,
+			});
+		}
+	};
+
+	// Get Polls
+	const getPolls = async () => {
+		try {
+			const res = await axios.get('/api/polls');
+			dispatch({ type: GET_POLLS, payload: res.data });
 		} catch (err) {
 			dispatch({
 				type: POLL_ERROR,
@@ -96,6 +110,7 @@ const PollState = props => {
 				filtered: state.filtered,
 				error: state.error,
 				addPoll,
+				getPolls,
 				deletePoll,
 				setCurrent,
 				updatePoll,
