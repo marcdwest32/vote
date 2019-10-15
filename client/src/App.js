@@ -4,23 +4,35 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import PollState from './context/poll/PollState';
+import AuthState from './context/auth/AuthState';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import setAuthToken from './utils/setAuthToken';
 import './App.css';
+
+if (localStorage.token) {
+	setAuthToken(localStorage.token);
+}
 
 const App = () => {
 	return (
-		<PollState>
-			<Router>
-				<Fragment className='App'>
-					<Navbar />
-					<div className='container'>
-						<Switch>
-							<Route exact path='/' component={Home} />
-							<Route exact path='/about' component={About} />
-						</Switch>
-					</div>
-				</Fragment>
-			</Router>
-		</PollState>
+		<AuthState>
+			<PollState>
+				<Router>
+					<Fragment className='App'>
+						<Navbar />
+						<div className='container'>
+							<Switch>
+								<Route exact path='/' component={Home} />
+								<Route exact path='/about' component={About} />
+								<Route exact path='/register' component={Register} />
+								<Route exact path='/login' component={Login} />
+							</Switch>
+						</div>
+					</Fragment>
+				</Router>
+			</PollState>
+		</AuthState>
 	);
 };
 
