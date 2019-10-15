@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
+import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
-import { SET_ALERT } from '../../context/types';
 
 const Register = props => {
+	const alertContext = useContext(AlertContext);
 	const authContext = useContext(AuthContext);
+	const { setAlert } = alertContext;
 	const { register, error, clearErrors, isAuthenticated } = authContext;
 
 	useEffect(() => {
@@ -11,7 +13,7 @@ const Register = props => {
 			props.history.push('/');
 		}
 		if (error === 'User already exists') {
-			// setAlert(error, 'danger');
+			setAlert(error, 'danger');
 			clearErrors();
 		}
 		// eslint-disable-next-line
@@ -30,13 +32,13 @@ const Register = props => {
 	const onSubmit = e => {
 		e.preventDefault();
 		if (name === '' || password === '') {
-			// setAlert('Please Fill Out All Fields', 'danger');
+			setAlert('Please Fill Out All Fields', 'danger');
 		}
 		if (password.length < 6 || password2.length < 6) {
-			// setAlert('Password Must be at Least 6 Characters', 'danger');
+			setAlert('Password Must be at Least 6 Characters', 'danger');
 		}
 		if (password !== password2) {
-			// setAlert('Password Does Not Match', 'danger');
+			setAlert('Password Does Not Match', 'danger');
 		} else {
 			register({
 				name,
