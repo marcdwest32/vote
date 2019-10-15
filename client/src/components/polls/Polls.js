@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PollItem from './PollItem';
 import PollContext from '../../context/poll/pollContext';
 
@@ -13,9 +14,19 @@ const Polls = () => {
 
 	return (
 		<Fragment>
-			{filtered !== null
-				? filtered.map(poll => <PollItem id={poll._id} poll={poll} />)
-				: polls.map(poll => <PollItem id={poll._id} poll={poll} />)}
+			<TransitionGroup>
+				{filtered !== null
+					? filtered.map(poll => (
+							<CSSTransition key={poll.id} timeout={500} classNames='item'>
+								<PollItem poll={poll} />
+							</CSSTransition>
+					  ))
+					: polls.map(poll => (
+							<CSSTransition key={poll.id} timeout={500} classNames='item'>
+								<PollItem poll={poll} />
+							</CSSTransition>
+					  ))}
+			</TransitionGroup>
 		</Fragment>
 	);
 };
