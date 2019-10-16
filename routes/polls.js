@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator/check');
-const User = require('../models/User');
+// const User = require('../models/User');
 const Poll = require('../models/Polls');
 
 // @route GET api/polls
@@ -60,35 +60,34 @@ router.post(
 // @route PUT api/polls/:id
 // @desc Update poll
 // @access Private
-router.put('/:id', auth, async (req, res) => {
+router.put('/:_id', auth, async (req, res) => {
 	const { vote } = req.body;
-
 	// get current poll results
 
 	try {
-		let poll = await Poll.findById(req.params.id);
+		let poll = await Poll.findById(req.params._id);
 
 		if (!poll) return res.status(404).json({ msg: 'Poll Not Found' });
 
-		if (vote === '1') {
+		if (vote === 1) {
 			poll = await Poll.findByIdAndUpdate(
-				req.params.id,
+				req.params._id,
 				{ $inc: { option1votes: 1 } },
 				{ new: true }
 			);
 			res.status(200).send('Vote Counted!');
 		}
-		if (vote === '2') {
+		if (vote === 2) {
 			poll = await Poll.findByIdAndUpdate(
-				req.params.id,
+				req.params._id,
 				{ $inc: { option2votes: 1 } },
 				{ new: true }
 			);
 			res.status(200).send('Vote Counted!');
 		}
-		if (vote === '3') {
+		if (vote === 3) {
 			poll = await Poll.findByIdAndUpdate(
-				req.params.id,
+				req.params._id,
 				{ $inc: { option3votes: 1 } },
 				{ new: true }
 			);
