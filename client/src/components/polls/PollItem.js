@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
 import PollContext from '../../context/poll/pollContext';
+import Chart from '../Chart'
 
 const PollItem = ({ poll }) => {
 	const pollContext = useContext(PollContext);
@@ -65,6 +65,7 @@ const PollItem = ({ poll }) => {
 					{'  '}
 					{option3votes}
 				</li>
+				<Chart poll={poll}/>
 			</ul>
 		</div>
 	);
