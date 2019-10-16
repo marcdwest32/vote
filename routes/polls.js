@@ -6,11 +6,12 @@ const User = require('../models/User');
 const Poll = require('../models/Polls');
 
 // @route GET api/polls
-// @desc Get all user polls
+// @desc Get all polls
 // @access Private
 router.get('/', auth, async (req, res) => {
 	try {
-		const polls = await Poll.find({ user: req.user.id }).sort({ date: -1 });
+		console.log(req);
+		const polls = await Poll.find().sort({ date: -1 });
 		res.json(polls);
 	} catch (err) {
 		console.error(err.message);
