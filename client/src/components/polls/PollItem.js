@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import PollContext from '../../context/poll/pollContext';
 
 const PollItem = ({ poll }) => {
@@ -11,9 +11,9 @@ const PollItem = ({ poll }) => {
 		option1,
 		option2,
 		option3,
-		option1vote,
-		option2vote,
-		option3vote,
+		option1votes,
+		option2votes,
+		option3votes,
 	} = poll;
 
 	const checked = 'fas fa-check-circle';
@@ -41,7 +41,7 @@ const PollItem = ({ poll }) => {
 						{option1}
 					</i>
 					{'  '}
-					{option1vote}
+					{option1votes}
 				</li>
 				<li className='hover-pointer'>
 					<i
@@ -52,7 +52,7 @@ const PollItem = ({ poll }) => {
 						{option2}
 					</i>
 					{'  '}
-					{option2vote}
+					{option2votes}
 				</li>
 				<li className='hover-pointer'>
 					<i
@@ -63,7 +63,7 @@ const PollItem = ({ poll }) => {
 						{option3}
 					</i>
 					{'  '}
-					{option3vote}
+					{option3votes}
 				</li>
 			</ul>
 		</div>
