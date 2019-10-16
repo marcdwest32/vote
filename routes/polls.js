@@ -10,7 +10,6 @@ const Poll = require('../models/Polls');
 // @access Private
 router.get('/', auth, async (req, res) => {
 	try {
-		console.log(req);
 		const polls = await Poll.find().sort({ date: -1 });
 		res.json(polls);
 	} catch (err) {
