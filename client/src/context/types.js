@@ -1,4 +1,5 @@
 export const ADD_POLL = 'ADD_POLL';
+export const LINK_POLL = 'LINK_POLL';
 export const POLL_ERROR = 'POLL_ERROR';
 export const DELETE_POLL = 'DELETE_POLL';
 export const SET_CURRENT = 'SET_CURRENT';
