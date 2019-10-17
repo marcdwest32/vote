@@ -18,6 +18,18 @@ router.get('/', auth, async (req, res) => {
 	}
 });
 
+// @route GET single poll for permalink
+router.get('/ap/polls/:_id', async (req, res) => {
+	try {
+		let poll = await Poll.findOneById(req.params._id);
+		console.log(poll);
+		res.json(poll);
+	} catch (err) {
+		console.error(err.response.message);
+		res.status(500).send('Server Error');
+	}
+});
+
 // @route POST api/polls
 // @desc Add new poll
 // @access Private
