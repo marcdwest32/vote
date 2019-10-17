@@ -1,5 +1,6 @@
 import {
 	ADD_POLL,
+	LINK_POLL,
 	GET_POLLS,
 	DELETE_POLL,
 	SET_CURRENT,
@@ -13,6 +14,7 @@ import {
 export default (state, action) => {
 	switch (action.type) {
 		case GET_POLLS:
+		case LINK_POLL:
 			return {
 				...state,
 				polls: action.payload,
