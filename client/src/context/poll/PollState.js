@@ -53,12 +53,7 @@ const PollState = props => {
 			});
 		}
 	};
-
-	// Delete Poll
-	const deletePoll = id => {
-		dispatch({ type: DELETE_POLL, payload: id });
-	};
-
+	
 	// Update Poll
 	const updatePoll = async poll => {
 		const config = {
@@ -71,11 +66,11 @@ const PollState = props => {
 				vote: poll.current,
 				config,
 			});
-			getPolls();
 			dispatch({
 				type: UPDATE_POLL,
 				payload: res.data,
 			});
+			getPolls();
 		} catch (err) {
 			dispatch({
 				type: VOTE_ERROR,
@@ -83,6 +78,11 @@ const PollState = props => {
 			});
 		}
 	};
+	
+		// Delete Poll
+		const deletePoll = id => {
+			dispatch({ type: DELETE_POLL, payload: id });
+		};
 
 	// Set Current
 	const setCurrent = (poll, option) => {
