@@ -4,6 +4,7 @@ import PollContext from './pollContext';
 import pollReducer from './pollReducer';
 import {
 	ADD_POLL,
+	LINK_POLL,
 	GET_POLLS,
 	POLL_ERROR,
 	DELETE_POLL,
@@ -53,7 +54,21 @@ const PollState = props => {
 			});
 		}
 	};
-	
+
+	// Link Poll
+	const linkPoll = async id => {
+		try {
+			const res = await axios.get(`/api/polls/${id}`);
+			dispatch({ type: LINK_POLL, payload: res.data });
+			console.log(res.data);
+		} catch (err) {
+			dispatch({
+				type: POLL_ERROR,
+				payload: err.msg,
+			});
+		}
+	};
+
 	// Update Poll
 	const updatePoll = async poll => {
 		const config = {
@@ -78,11 +93,11 @@ const PollState = props => {
 			});
 		}
 	};
-	
-		// Delete Poll
-		const deletePoll = id => {
-			dispatch({ type: DELETE_POLL, payload: id });
-		};
+
+	// Delete Poll
+	const deletePoll = id => {
+		dispatch({ type: DELETE_POLL, payload: id });
+	};
 
 	// Set Current
 	const setCurrent = (poll, option) => {
@@ -111,6 +126,7 @@ const PollState = props => {
 				error: state.error,
 				addPoll,
 				getPolls,
+				linkPoll,
 				deletePoll,
 				setCurrent,
 				updatePoll,
