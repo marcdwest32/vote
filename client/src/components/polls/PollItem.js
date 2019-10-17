@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import PollContext from '../../context/poll/pollContext';
-import Chart from '../Chart'
+import Chart from '../Chart';
 
 const PollItem = ({ poll }) => {
 	const pollContext = useContext(PollContext);
-	const { setCurrent, updatePoll } = pollContext;
+	const { setCurrent, updatePoll, linkPoll } = pollContext;
 	const {
-		_id,
 		question,
 		option1,
 		option2,
@@ -18,6 +17,7 @@ const PollItem = ({ poll }) => {
 
 	const checked = 'fas fa-check-circle';
 	const unchecked = 'far fa-circle';
+	// const permalink = linkPoll(`${poll._id}`);
 
 	return (
 		<div className='card bg-light'>
@@ -65,8 +65,11 @@ const PollItem = ({ poll }) => {
 					{'  '}
 					{option3votes}
 				</li>
-				<Chart poll={poll}/>
+				<Chart poll={poll} />
 			</ul>
+			{/* <a href={permalink}> */}
+			{/* <div>Permalink</div> */}
+			{/* </a> */}
 		</div>
 	);
 };
